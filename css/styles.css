@@ -1,0 +1,76 @@
+.selectHotelContainer{
+    height: 100vh;
+    position: absolute;
+}
+
+.selectedHotelCardContainer{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.selectedHotelCard{
+    width: 450px;
+    height: 500px;
+}
+
+.hotelContainer{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 100vH;
+}
+
+#myVideo{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.compareBookBtnContainer{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    /*border: 1px solid green;*/
+    /*height: 30%;*/
+}
+
+.compareBtn{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.hotelInfo{
+    position: relative;
+    display: flex;
+    height: 50%;
+}
+
+.hotelName{
+    /*border: 1px solid blue;*/
+    width: 50%;
+}
+
+.hotelPrice{
+    /*border: 1px solid red;*/
+    width: 50%;
+}
+
+.selectedHotelCard{
+    height: 60vH;
+    background: transparent !important;
+    background-color: rgba(255,255,255,0.5) !important;
+}
+.cardTitle{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.cardBody{
+
+}
