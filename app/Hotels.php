@@ -50,7 +50,7 @@ class Hotels
         }
         elseif ($name == 'nicksHotel')
         {
-            $this->price = 950;
+            $this->price = 925;
         }
         elseif ($name == 'davidsHotel')
         {
@@ -139,6 +139,32 @@ class Hotels
             $this->info = array("Self Catering","Wifi Included");
             return $this->info;
         }
+    }
+
+    public function getadditionalHotels($name){
+
+        if($name == 'bradsHotel')
+        {
+            return array("hotel1" => "nicksHotel" , "hotel2" => "davidsHotel", "hotel3" => "ayrtonsHotel","hotel4" => "riceFamilyHotel");
+        }
+        elseif ($name == 'nicksHotel')
+        {
+            return array("hotel1" => "bradsHotel" , "hotel2" => "davidsHotel", "hotel3" => "ayrtonsHotel","hotel4" => "riceFamilyHotel");
+        }
+        elseif ($name == 'davidsHotel')
+        {
+            return array("hotel1" => "bradsHotel" , "hotel2" => "nicksHotel", "hotel3" => "ayrtonsHotel","hotel4" => "riceFamilyHotel");
+        }
+        elseif ($name == 'ayrtonsHotel')
+        {
+            return array("hotel1" => "bradsHotel" , "hotel2" => "nicksHotel", "hotel3" => "davidsHotel","hotel4" => "riceFamilyHotel");
+        }
+        else
+        {
+            return array("hotel1" => "bradsHotel" , "hotel2" => "nicksHotel", "hotel3" => "davidsHotel","hotel4" => "ayrtonsHotel");
+        }
+
+
     }
 
 

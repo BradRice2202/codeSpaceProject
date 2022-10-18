@@ -15,6 +15,11 @@
 <video autoplay muted loop id="myVideo">
     <source src="../images/backgroundVideo.mp4" type="video/mp4">
 </video>
+<nav>
+    <?php
+        include '../components/navbar.html';
+    ?>
+</nav>
 <div class="container hotelContainer">
     <div class="selectedHotelCardContainer">
         <div class="card selectedHotelCard">
@@ -27,7 +32,7 @@
                                 $images = $hotel->getHotelImages($_POST['hotelName']);
                                 $image1 = $hotel->getHotelImages($_POST['hotelName']);
                                 $image1 = $image1[0][$_POST['hotelName']][0];
-                            echo"<img src='$image1'class='d-block w-100 card-img-top' alt='...' >";
+                                echo"<img src='$image1'class='d-block w-100 card-img-top' alt='...'>";
                             ?>
                         </div>
                         <div class="carousel-item">
@@ -36,7 +41,7 @@
                                 $images = $hotel->getHotelImages($_POST['hotelName']);
                                 $image2 = $hotel->getHotelImages($_POST['hotelName']);
                                 $image2 = $image2[0][$_POST['hotelName']][1];
-                            echo"<img src='$image2'class='d-block w-100 card-img-top' alt='...' >";
+                                echo"<img src='$image2'class='d-block w-100 card-img-top' alt='...'>";
                             ?>
                         </div>
                     </div>
@@ -59,9 +64,9 @@
                         <ul>
                             <li>
                                 <?php
-                                $hotel= new Hotels($_POST['hotelName']);
-                                $hotelName = $hotel->setHotelName($_POST['hotelName']);
-                                echo "$hotelName";
+                                    $hotel= new Hotels($_POST['hotelName']);
+                                    $hotelName = $hotel->setHotelName($_POST['hotelName']);
+                                    echo "$hotelName";
                                 ?>
                             </li>
                         </ul>
@@ -70,33 +75,41 @@
                         <ul>
                             <li>
                                 <?php
-                                $hotel = new Hotels($_POST['hotelName']);
-                                $price = $hotel->getHotelPrice($_POST['hotelName']) * $_POST["numberOfDays"];
-                                $days = $hotel->getDays($_POST["numberOfDays"]);
-                                echo"R$price for $days Days";
+                                    $hotel = new Hotels($_POST['hotelName']);
+                                    $price = $hotel->getHotelPrice($_POST['hotelName']) * $_POST["numberOfDays"];
+                                    $days = $hotel->getDays($_POST["numberOfDays"]);
+                                    echo"R$price for $days Days";
                                 ?>
                             </li>
                             <li>
                                 <?php
-                                $hotel = new Hotels ($_POST['hotelName']);
-                                $info = $hotel->getInfo($_POST['hotelName']);
-                                echo"$info[0]";
+                                    $hotel = new Hotels ($_POST['hotelName']);
+                                    $info = $hotel->getInfo($_POST['hotelName']);
+                                    echo"$info[0]";
                                 ?>
                             </li>
                             <li>
                                 <?php
-                                $hotel = new Hotels ($_POST['hotelName']);
-                                $info = $hotel->getInfo($_POST['hotelName']);
-                                echo"$info[1]";
+                                    $hotel = new Hotels ($_POST['hotelName']);
+                                    $info = $hotel->getInfo($_POST['hotelName']);
+                                    echo"$info[1]";
                                 ?>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="compareBookBtnContainer">
-                    <a href="" class="btn btn-primary compareBtn">Compare Options</a>
+                    <div>
+                        <?php
+                            $selectedHotel = $_POST['hotelName'];
+                            $days = $_POST['numberOfDays'];
+                            echo '<a href="../templates/compareHotels.php?hotel=' . $selectedHotel . '&days=' . $days . ' " class="btn btn-primary compareBtn">Compare Options</a>'
+                        ?>
+                    </div>
+                    <div>
+                        <a href="" class="btn btn-primary compareBtn">Book Now</a>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -106,12 +119,3 @@
 
 </body>
 </html>
-
-<!--    <?php-->
-<!--        if($_POST['hotelName'] == 'bradsHotel'){-->
-<!--            echo'<img src="/images/bradsHotel1stImage.jpg">';-->
-<!--            exit;-->
-<!--        }else{-->
-<!--            -->
-<!--        }-->
-<!--    ?>-->

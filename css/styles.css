@@ -74,3 +74,67 @@
 .cardBody{
 
 }
+
+.navBar{
+    display: flex;
+    flex-wrap: nowrap;
+    position: sticky;
+    height: 90px;
+    background: transparent !important;
+    background-color: rgba(255,255,255,0.5) !important;
+}
+
+.navBarLinks{
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.compareHotelsBody{
+    display: flex;
+    height: 100Vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.compareHotelsContainer{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.cardsContainer{
+    border: 1px solid red;
+    flex-direction: row;
+    display: flex;
+}
+
+.hotelCard{
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.hotelCard:hover{
+    transform: scale(1.1);
+}
+
+.filterContainer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.hotelFilters{
+    align-self: center;
+}
+
+.selectedHotelInfoContainer{
+    display: flex;
+    flex-direction: row;
+}
