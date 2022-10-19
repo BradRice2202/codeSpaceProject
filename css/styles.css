@@ -109,7 +109,7 @@
 }
 
 .cardsContainer{
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     flex-direction: row;
     display: flex;
 }
@@ -138,3 +138,38 @@
     display: flex;
     flex-direction: row;
 }
+
+.compareHotelImage{
+    height: 184px;
+}
+
+.priceSelectorContainer{
+    display: flex;
+    /*border: 1px solid blue;*/
+    /*height: 50px;*/
+    width: 100%;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.priceSelector{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-self: flex-end;
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.pricesFilterLabel{
+    align-self: center;
+}
+
+.selectedHotelInfoContainer{
+
+}ul{
+
+ }li{
+    font-size: 0.9rem;
+   }

@@ -1,3 +1,10 @@
+<?php
+session_start();
+$_SESSION['name'] = $_POST['firstName'];
+$_SESSION['lname'] = $_POST['lastName'];
+$_SESSION['days'] = $_POST['numberOfDays'];
+$_SESSION['hotel'] = $_POST['hotelName'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,7 +110,8 @@
                         <?php
                             $selectedHotel = $_POST['hotelName'];
                             $days = $_POST['numberOfDays'];
-                            echo '<a href="../templates/compareHotels.php?hotel=' . $selectedHotel . '&days=' . $days . ' " class="btn btn-primary compareBtn">Compare Options</a>'
+                            $price = 'high';
+                            echo '<a href="../templates/compareHotels.php?hotel=' . $selectedHotel . '&days=' . $days . '&price=' . $price . ' " class="btn btn-primary compareBtn">Compare Options</a>'
                         ?>
                     </div>
                     <div>

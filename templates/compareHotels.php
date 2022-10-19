@@ -17,32 +17,140 @@ include "../routes/compare.php";
 <body class="compareHotelsBody">
     <nav></nav>
     <section class="compareHotelsContainer">
+        <div class="priceSelectorContainer">
+            <div class="priceSelector">
+                <label for="pricesFilter" class="form-label pricesFilterLabel">Price Filter:</label>
+                <br>
+                <select name="pricesFilter" id="pricesFilter" class="form-select" onchange="location = this.value;">
+                    <option value="" selected disabled>Select a filter</option>
+                    <?php
+                        $hotel = $_GET['hotel'];
+                        $days = $_GET['days'];
+                        $price = 'high';
+                        echo'<option value="compareHotels.php?hotel=' . $hotel . '&days=' . $days . '&price=' . $price . ' ">High</option>'
+                    ?>
+                    <?php
+                    $hotel = $_GET['hotel'];
+                    $days = $_GET['days'];
+                    $price = 'low';
+                    echo'<option value="compareHotels.php?hotel=' . $hotel . '&days=' . $days . '&price=' . $price . ' ">Low</option>'
+                    ?>
+                </select>
+            </div>
+        </div>
         <div class="cardsContainer">
             <div class="leftCard">
                 <div class="leftHotelCard hotelCard" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    <div class="row">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <?php
+                                        if($_GET['price'] == 'high')
+                                        {
+                                            $additionalHotel = getClosestPriceHotelsHighToLow();
+                                            $hotel1 = array_slice($additionalHotel, 0, 1, true);
+                                            $hotelName = array_keys($hotel1);
+                                            $name = $hotelName[0];
+                                            $hotel = new Hotels($name);
+                                            $image1 = $hotel->getHotelImages($name);
+                                            $image1 = $image1[0]["$name"][0];
+                                            echo"<img src='$image1'class='d-block w-100 card-img-top compareHotelImage' alt='...'>";
+                                        }
+                                        elseif ($_GET['price'] == 'low')
+                                        {
+                                            $additionalHotel = getClosestHotelsLowToHigh();
+                                            $hotel1 = array_slice($additionalHotel, 0, 1, true);
+                                            $hotelName = array_keys($hotel1);
+                                            $name = $hotelName[0];
+                                            $hotel = new Hotels($name);
+                                            $image1 = $hotel->getHotelImages($name);
+                                            $image1 = $image1[0]["$name"][0];
+                                            echo"<img src='$image1'class='d-block w-100 card-img-top compareHotelImage' alt='...'>";
+                                        }
+                                    ?>
+                                </div>
+                                <div class="carousel-item">
+                                    <?php
+                                        if($_GET['price'] == 'high')
+                                        {
+                                            $additionalHotel = getClosestPriceHotelsHighToLow();
+                                            $hotel1 = array_slice($additionalHotel, 0, 1, true);
+                                            $hotelName = array_keys($hotel1);
+                                            $name = $hotelName[0];
+                                            $hotel = new Hotels($name);
+                                            $image2 = $hotel->getHotelImages($name);
+                                            $image2 = $image2[0]["$name"][1];
+                                            echo"<img src='$image2'class='d-block w-100 card-img-top compareHotelImage' alt='...'>";
+                                        }
+                                        elseif ($_GET['price'] == 'low')
+                                        {
+                                            $additionalHotel = getClosestHotelsLowToHigh();
+                                            $hotel1 = array_slice($additionalHotel, 0, 1, true);
+                                            $hotelName = array_keys($hotel1);
+                                            $name = $hotelName[0];
+                                            $hotel = new Hotels($name);
+                                            $image2 = $hotel->getHotelImages($name);
+                                            $image2 = $image2[0]["$name"][1];
+                                            echo"<img src='$image2'class='d-block w-100 card-img-top compareHotelImage' alt='...'>";
+                                        }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title"><?php
-                            $additionalHotel = getClosestPriceHotelsHighToLow();
-                            $hotel1 = array_slice($additionalHotel, 0, 1, true);
-                            $hotelName = array_keys($hotel1);
-                            $name = $hotelName[0];
-                            $hotel = new Hotels($name);
-                            $secondHotel = $hotel->setHotelName($name);
-                            echo $secondHotel;
-                        ?></h5>
+                        <h5 class="card-title">
+                            <?php
+                                if($_GET['price'] == 'high')
+                                {
+                                    $additionalHotel = getClosestPriceHotelsHighToLow();
+                                    $hotel1 = array_slice($additionalHotel, 0, 1, true);
+                                    $hotelName = array_keys($hotel1);
+                                    $name = $hotelName[0];
+                                    $hotel = new Hotels($name);
+                                    $secondHotel = $hotel->setHotelName($name);
+                                    echo $secondHotel;
+                                }
+                                elseif ($_GET['price'] == 'low')
+                                {
+                                    $additionalHotel = getClosestHotelsLowToHigh();
+                                    $hotel1 = array_slice($additionalHotel, 0, 1, true);
+                                    $hotelName = array_keys($hotel1);
+                                    $name = $hotelName[0];
+                                    $hotel = new Hotels($name);
+                                    $secondHotel = $hotel->setHotelName($name);
+                                    echo $secondHotel;
+                                }
+
+                            ?>
+                        </h5>
                         <div class="selectedHotelInfoContainer">
                             <div class="selectedHotelInfoLeft">
                                 <ul>
                                     <li>
                                         <?php
-                                        $additionalHotelPrice = getClosestPriceHotelsHighToLow();
-                                        $additionalHotel1PriceName = array_slice($additionalHotelPrice, 0, 1, true);
-                                        $additionalHotel1Name = array_keys($additionalHotel1PriceName);
-                                        $additionalHotel1 = $additionalHotel1Name[0];
-                                        $hotel = new Hotels($additionalHotel1);
-                                        $price = $hotel->getHotelPrice($additionalHotel1) * $_GET['days'];
-                                        echo $price;
+                                            if($_GET['price'] == 'high')
+                                            {
+                                                $additionalHotelPrice = getClosestPriceHotelsHighToLow();
+                                                $additionalHotel1PriceName = array_slice($additionalHotelPrice, 0, 1, true);
+                                                $additionalHotel1Name = array_keys($additionalHotel1PriceName);
+                                                $additionalHotel1 = $additionalHotel1Name[0];
+                                                $hotel = new Hotels($additionalHotel1);
+                                                $price = $hotel->getHotelPrice($additionalHotel1) * $_GET['days'];
+                                                echo "R".$price;
+                                            }
+                                            elseif ($_GET['price'] == 'low')
+                                            {
+                                                $additionalHotelPrice = getClosestHotelsLowToHigh();
+                                                $additionalHotel1PriceName = array_slice($additionalHotelPrice, 0, 1, true);
+                                                $additionalHotel1Name = array_keys($additionalHotel1PriceName);
+                                                $additionalHotel1 = $additionalHotel1Name[0];
+                                                $hotel = new Hotels($additionalHotel1);
+                                                $price = $hotel->getHotelPrice($additionalHotel1) * $_GET['days'];
+                                                echo "R".$price;
+                                            }
+
                                         ?>
                                     </li>
                                 </ul>
@@ -51,25 +159,85 @@ include "../routes/compare.php";
                                 <ul>
                                     <li>
                                         <?php
+                                            if($_GET['price'] == 'high')
+                                            {
+                                                $additionalHotelPrice = getClosestPriceHotelsHighToLow();
+                                                $additionalHotel1PriceName = array_slice($additionalHotelPrice, 0, 1, true);
+                                                $additionalHotel1Name = array_keys($additionalHotel1PriceName);
+                                                $additionalHotel1 = $additionalHotel1Name[0];
+                                                $hotel = new Hotels($additionalHotel1);
+                                                $info = $hotel->getInfo($additionalHotel1);
+                                                echo $info[0];
+                                            }
+                                            elseif ($_GET['price'] == 'low')
+                                            {
+                                                $additionalHotelPrice = getClosestHotelsLowToHigh();
+                                                $additionalHotel1PriceName = array_slice($additionalHotelPrice, 0, 1, true);
+                                                $additionalHotel1Name = array_keys($additionalHotel1PriceName);
+                                                $additionalHotel1 = $additionalHotel1Name[0];
+                                                $hotel = new Hotels($additionalHotel1);
+                                                $info = $hotel->getInfo($additionalHotel1);
+                                                echo $info[0];
+                                            }
 
                                         ?>
                                     </li>
                                     <li>
                                         <?php
-
+                                            if($_GET['price'] == 'high')
+                                            {
+                                                $additionalHotelPrice = getClosestPriceHotelsHighToLow();
+                                                $additionalHotel1PriceName = array_slice($additionalHotelPrice, 0, 1, true);
+                                                $additionalHotel1Name = array_keys($additionalHotel1PriceName);
+                                                $additionalHotel1 = $additionalHotel1Name[0];
+                                                $hotel = new Hotels($additionalHotel1);
+                                                $info = $hotel->getInfo($additionalHotel1);
+                                                echo $info[1];
+                                            }
+                                            elseif ($_GET['price'] == 'low')
+                                            {
+                                                $additionalHotelPrice = getClosestHotelsLowToHigh();
+                                                $additionalHotel1PriceName = array_slice($additionalHotelPrice, 0, 1, true);
+                                                $additionalHotel1Name = array_keys($additionalHotel1PriceName);
+                                                $additionalHotel1 = $additionalHotel1Name[0];
+                                                $hotel = new Hotels($additionalHotel1);
+                                                $info = $hotel->getInfo($additionalHotel1);
+                                                echo $info[1];
+                                            }
                                         ?>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <p class="card-text">Some text</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <p class="card-text"></p>
+                        <a href="#" class="btn btn-primary">Book Now</a>
                     </div>
                 </div>
             </div>
             <div class="middleCard">
                 <div class="middleHotelCard hotelCard" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    <div class="row">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <?php
+                                        $name = new Hotels($_GET['hotel']);
+                                        $image1 = $name->getHotelImages($_GET['hotel']);
+                                        $image1 = $image1[0][$_GET['hotel']][0];
+                                        echo"<img src='$image1'class='d-block w-100 card-img-top compareHotelImage' alt='...'>";
+                                    ?>
+                                </div>
+                                <div class="carousel-item">
+                                    <?php
+                                    $name = new Hotels($_GET['hotel']);
+                                    $image2 = $name->getHotelImages($_GET['hotel']);
+                                    $image2 = $image2[0][$_GET['hotel']][1];
+                                    echo"<img src='$image2'class='d-block w-100 card-img-top compareHotelImage' alt='...'>";
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title"><?php echo getSelectedHotel(); ?></h5>
                         <div class="selectedHotelInfoContainer">
@@ -104,27 +272,185 @@ include "../routes/compare.php";
                                 </ul>
                             </div>
                         </div>
-
-                        <p class="card-text">Some text</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <p class="card-text"></p>
+                        <a href="#" class="btn btn-primary">Book Now</a>
                     </div>
                 </div>
             </div>
             <div class="rightCard">
                 <div class="rightHotelCard hotelCard" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+                    <div class="row">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <?php
+                                        if($_GET['price'] == 'high')
+                                        {
+                                            $additionalHotel = getClosestPriceHotelsHighToLow();
+                                            $hotel1 = array_slice($additionalHotel, -1, 1, true);
+                                            $hotelName = array_keys($hotel1);
+                                            $name = $hotelName[0];
+                                            $hotel = new Hotels($name);
+                                            $image1 = $hotel->getHotelImages($name);
+                                            $image1 = $image1[0]["$name"][0];
+                                            echo"<img src='$image1'class='d-block w-100 card-img-top compareHotelImage' alt='...'>";
+                                        }
+                                        elseif ($_GET['price'] == 'low')
+                                        {
+                                            $additionalHotel = getClosestHotelsLowToHigh();
+                                            $hotel1 = array_slice($additionalHotel, -1, 1, true);
+                                            $hotelName = array_keys($hotel1);
+                                            $name = $hotelName[0];
+                                            $hotel = new Hotels($name);
+                                            $image1 = $hotel->getHotelImages($name);
+                                            $image1 = $image1[0]["$name"][0];
+                                            echo"<img src='$image1'class='d-block w-100 card-img-top compareHotelImage' alt='...'>";
+                                        }
+                                    ?>
+                                </div>
+                                <div class="carousel-item">
+                                    <?php
+                                        if($_GET['price'] == 'high')
+                                        {
+                                            $additionalHotel = getClosestPriceHotelsHighToLow();
+                                            $hotel1 = array_slice($additionalHotel, -1, 1, true);
+                                            $hotelName = array_keys($hotel1);
+                                            $name = $hotelName[0];
+                                            $hotel = new Hotels($name);
+                                            $image2 = $hotel->getHotelImages($name);
+                                            $image2 = $image2[0]["$name"][1];
+                                            echo"<img src='$image2'class='d-block w-100 card-img-top compareHotelImage' alt='...'>";
+                                        }
+                                        elseif ($_GET['price'] == 'low')
+                                        {
+                                            $additionalHotel = getClosestHotelsLowToHigh();
+                                            $hotel1 = array_slice($additionalHotel, -1, 1, true);
+                                            $hotelName = array_keys($hotel1);
+                                            $name = $hotelName[0];
+                                            $hotel = new Hotels($name);
+                                            $image2 = $hotel->getHotelImages($name);
+                                            $image2 = $image2[0]["$name"][1];
+                                            echo"<img src='$image2'class='d-block w-100 card-img-top compareHotelImage' alt='...'>";
+                                        }
+
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title"><?php
-                            $additionalHotel = getClosestPriceHotelsHighToLow();
-                            $hotel2 = array_slice($additionalHotel, -1, 1, true);
-                            $hotelName = array_keys($hotel2);
-                            $name = $hotelName[0];
-                            $hotel = new Hotels($name);
-                            $thirdHotel = $hotel->setHotelName($name);
-                            echo $thirdHotel;
-                            ?></h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">
+                            <?php
+                                if($_GET['price'] == 'high')
+                                {
+                                    $additionalHotel = getClosestPriceHotelsHighToLow();
+                                    $hotel2 = array_slice($additionalHotel, -1, 1, true);
+                                    $hotelName = array_keys($hotel2);
+                                    $name = $hotelName[0];
+                                    $hotel = new Hotels($name);
+                                    $thirdHotel = $hotel->setHotelName($name);
+                                    echo $thirdHotel;
+                                }
+                                elseif ($_GET['price'] == 'low')
+                                {
+                                    $additionalHotel = getClosestHotelsLowToHigh();
+                                    $hotel2 = array_slice($additionalHotel, -1, 1, true);
+                                    $hotelName = array_keys($hotel2);
+                                    $name = $hotelName[0];
+                                    $hotel = new Hotels($name);
+                                    $thirdHotel = $hotel->setHotelName($name);
+                                    echo $thirdHotel;
+                                }
+
+                            ?>
+                        </h5>
+                        <div class="selectedHotelInfoContainer">
+                            <div class="selectedHotelInfoLeft">
+                                <ul>
+                                    <li>
+                                        <?php
+                                            if($_GET['price'] == 'high')
+                                            {
+                                                $additionalHotelPrice = getClosestPriceHotelsHighToLow();
+                                                $additionalHotel1PriceName = array_slice($additionalHotelPrice, -1, 1, true);
+                                                $additionalHotel1Name = array_keys($additionalHotel1PriceName);
+                                                $additionalHotel1 = $additionalHotel1Name[0];
+                                                $hotel = new Hotels($additionalHotel1);
+                                                $price = $hotel->getHotelPrice($additionalHotel1) * $_GET['days'];
+                                                echo "R".$price;
+                                            }
+                                            elseif ($_GET['price'] == 'low')
+                                            {
+                                                $additionalHotelPrice = getClosestHotelsLowToHigh();
+                                                $additionalHotel1PriceName = array_slice($additionalHotelPrice, -1, 1, true);
+                                                $additionalHotel1Name = array_keys($additionalHotel1PriceName);
+                                                $additionalHotel1 = $additionalHotel1Name[0];
+                                                $hotel = new Hotels($additionalHotel1);
+                                                $price = $hotel->getHotelPrice($additionalHotel1) * $_GET['days'];
+                                                echo "R".$price;
+                                            }
+
+                                        ?>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="selectedHotelInfoRight">
+                                <ul>
+                                    <li>
+                                        <?php
+                                            if($_GET['price'] == 'high')
+                                            {
+                                                $additionalHotelPrice = getClosestPriceHotelsHighToLow();
+                                                $additionalHotel1PriceName = array_slice($additionalHotelPrice, -1, 1, true);
+                                                $additionalHotel1Name = array_keys($additionalHotel1PriceName);
+                                                $additionalHotel1 = $additionalHotel1Name[0];
+                                                $hotel = new Hotels($additionalHotel1);
+                                                $info = $hotel->getInfo($additionalHotel1);
+                                                echo $info[0];
+                                            }
+                                            elseif ($_GET['price'] == 'low')
+                                            {
+                                                $additionalHotelPrice = getClosestHotelsLowToHigh();
+                                                $additionalHotel1PriceName = array_slice($additionalHotelPrice, -1, 1, true);
+                                                $additionalHotel1Name = array_keys($additionalHotel1PriceName);
+                                                $additionalHotel1 = $additionalHotel1Name[0];
+                                                $hotel = new Hotels($additionalHotel1);
+                                                $info = $hotel->getInfo($additionalHotel1);
+                                                echo $info[0];
+                                            }
+
+                                        ?>
+                                    </li>
+                                    <li>
+                                        <?php
+                                            if($_GET['price'] == 'high')
+                                            {
+                                                $additionalHotelPrice = getClosestPriceHotelsHighToLow();
+                                                $additionalHotel1PriceName = array_slice($additionalHotelPrice, -1, 1, true);
+                                                $additionalHotel1Name = array_keys($additionalHotel1PriceName);
+                                                $additionalHotel1 = $additionalHotel1Name[0];
+                                                $hotel = new Hotels($additionalHotel1);
+                                                $info = $hotel->getInfo($additionalHotel1);
+                                                echo $info[1];
+                                            }
+                                            elseif ($_GET['price'] == 'low')
+                                            {
+                                                $additionalHotelPrice = getClosestHotelsLowToHigh();
+                                                $additionalHotel1PriceName = array_slice($additionalHotelPrice, -1, 1, true);
+                                                $additionalHotel1Name = array_keys($additionalHotel1PriceName);
+                                                $additionalHotel1 = $additionalHotel1Name[0];
+                                                $hotel = new Hotels($additionalHotel1);
+                                                $info = $hotel->getInfo($additionalHotel1);
+                                                echo $info[1];
+                                            }
+
+                                        ?>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="card-text"></p>
+                        <a href="#" class="btn btn-primary">Book Now</a>
                     </div>
                 </div>
             </div>
@@ -134,13 +460,13 @@ include "../routes/compare.php";
             <br>
             <select name="filters" id="filters" class="form-select">
                 <option value="" selected disabled>Select a filter</option>
-                <option value="volvo">Close too beach</option>
-                <option value="saab">Pet Friendly</option>
-                <option value="mercedes">Wifi Included</option>
-                <option value="audi">Parking</option>
-                <option value="audi">1 Bedroom</option>
-                <option value="audi">2 Bedrooms</option>
-                <option value="audi">Self Catering</option>
+                <option value="closeToBeach">Close too beach</option>
+                <option value="petFriendly">Pet Friendly</option>
+                <option value="wifi">Wifi Included</option>
+                <option value="parking">Parking</option>
+                <option value="singBedroom">1 Bedroom</option>
+                <option value="doubleBedrooms">2 Bedrooms</option>
+                <option value="selfCatering">Self Catering</option>
             </select>
         </div>
     </section>
