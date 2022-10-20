@@ -1,5 +1,10 @@
 <?php
 include "../routes/compare.php";
+session_start();
+//echo"<pre>";
+//print_r($_SESSION);
+//exit;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -210,7 +215,29 @@ include "../routes/compare.php";
                             </div>
                         </div>
                         <p class="card-text"></p>
-                        <a href="#" class="btn btn-primary">Book Now</a>
+                        <?php
+                        if($_GET['price'] == 'high')
+                        {
+                            $additionalHotel = getClosestPriceHotelsHighToLow();
+                            $hotel1 = array_slice($additionalHotel, 0, 1, true);
+                            $hotelName = array_keys($hotel1);
+                            $name = $hotelName[0];
+                            $hotel = new Hotels($name);
+                            $secondHotel = $hotel->setHotelName($name);
+                            echo'<a href="/templates/bookHotel.php?hotel=' . $name . '" class="btn btn-primary">Book Now</a>';
+                        }
+                        elseif ($_GET['price'] == 'low')
+                        {
+                            $additionalHotel = getClosestHotelsLowToHigh();
+                            $hotel1 = array_slice($additionalHotel, 0, 1, true);
+                            $hotelName = array_keys($hotel1);
+                            $name = $hotelName[0];
+                            $hotel = new Hotels($name);
+                            $secondHotel = $hotel->setHotelName($name);
+                            echo'<a href="/templates/bookHotel.php?hotel=' . $name . '" class="btn btn-primary">Book Now</a>';
+                        }
+                        ?>
+
                     </div>
                 </div>
             </div>
@@ -273,7 +300,11 @@ include "../routes/compare.php";
                             </div>
                         </div>
                         <p class="card-text"></p>
-                        <a href="#" class="btn btn-primary">Book Now</a>
+                        <?php
+                            $hotel = $_GET['hotel'];
+                            echo'<a href="/templates/bookHotel.php?hotel=' . $hotel . '" class="btn btn-primary">Book Now</a>'
+                        ?>
+
                     </div>
                 </div>
             </div>
@@ -450,7 +481,28 @@ include "../routes/compare.php";
                             </div>
                         </div>
                         <p class="card-text"></p>
-                        <a href="#" class="btn btn-primary">Book Now</a>
+                        <?php
+                            if($_GET['price'] == 'high')
+                            {
+                                $additionalHotel = getClosestPriceHotelsHighToLow();
+                                $hotel2 = array_slice($additionalHotel, -1, 1, true);
+                                $hotelName = array_keys($hotel2);
+                                $name = $hotelName[0];
+                                $hotel = new Hotels($name);
+                                $thirdHotel = $hotel->setHotelName($name);
+                                echo'<a href="/templates/bookHotel.php?hotel=' . $name . '" class="btn btn-primary">Book Now</a>';
+                            }
+                            elseif ($_GET['price'] == 'low')
+                            {
+                                $additionalHotel = getClosestHotelsLowToHigh();
+                                $hotel2 = array_slice($additionalHotel, -1, 1, true);
+                                $hotelName = array_keys($hotel2);
+                                $name = $hotelName[0];
+                                $hotel = new Hotels($name);
+                                $thirdHotel = $hotel->setHotelName($name);
+                                echo'<a href="/templates/bookHotel.php?hotel=' . $name . '" class="btn btn-primary">Book Now</a>';
+                            }
+                        ?>
                     </div>
                 </div>
             </div>

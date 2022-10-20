@@ -172,4 +172,66 @@
 
  }li{
     font-size: 0.9rem;
-   }
+}
+
+.email-input-book{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.email-title-book{
+    align-self: center;
+}
+
+.confirmHotelPaymentInfo{
+    display: flex;
+    flex-direction: column;
+}
+
+.confirmationContainer{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirmationBody{
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirmationDetailsContainer{
+    position: relative;
+    display: flex;
+
+}
+.confirmationLeftDetails{
+    position: relative;
+}
+
+.confirmImage{
+    height: 25vH;
+    width: auto;
+}
+
+.confirmationCard{
+    width: 25rem;
+    height: 50vH;
+}
+
+.confirmCardBody{
+    position: relative;
+}
+
+/*.confirmationBtn{*/
+/*    position: relative;*/
+/*    bottom: 0;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-self: end;*/
+/*}*/
