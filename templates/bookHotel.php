@@ -24,8 +24,8 @@ include "../app/Hotels.php";
                         <div class="text-center">
                             <h5>Book Hotel</h5>
                         </div>
-                        <form method="post" id="login-form" action="/templates/checkout.php">
-                            <div class="row">
+                        <form method="post" id="login-form" class="bookHotelForm" action="/templates/checkout.php">
+                            <div class="row bookHotelFormInputs">
                                 <div class="col">
                                     <div class="mb-3">
                                         <label for="firstName" class="form-label">First Name:</label>

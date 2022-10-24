@@ -15,6 +15,7 @@ $_SESSION['hotel'] = $_POST['hotelName'];
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/mobile.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
@@ -23,17 +24,14 @@ $_SESSION['hotel'] = $_POST['hotelName'];
     <source src="../images/backgroundVideo.mp4" type="video/mp4">
 </video>
 <nav>
-    <?php
-        include '../components/navbar.html';
-    ?>
 </nav>
 <div class="container hotelContainer">
     <div class="selectedHotelCardContainer">
         <div class="card selectedHotelCard">
-            <div class="row">
-                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="row selectedHotelImages">
+                <div id="carouselExampleControls" class="carousel slide selectedHotelCarousel" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
+                        <div class="carousel-item selectedHotelImage active">
                             <?php
                                 $hotel = new Hotels($_POST['hotelName']);
                                 $images = $hotel->getHotelImages($_POST['hotelName']);
@@ -42,7 +40,7 @@ $_SESSION['hotel'] = $_POST['hotelName'];
                                 echo"<img src='$image1'class='d-block w-100 card-img-top' alt='...'>";
                             ?>
                         </div>
-                        <div class="carousel-item">
+                        <div class="carousel-item selectedHotelImage">
                             <?php
                                 $hotel = new Hotels($_POST['hotelName']);
                                 $images = $hotel->getHotelImages($_POST['hotelName']);

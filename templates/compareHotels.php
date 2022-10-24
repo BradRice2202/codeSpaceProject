@@ -241,8 +241,8 @@ session_start();
                     </div>
                 </div>
             </div>
-            <div class="middleCard">
-                <div class="middleHotelCard hotelCard" style="width: 18rem;">
+            <div class="middleCard selectedHotel">
+                <div class="middleHotelCard hotelCard " style="width: 18rem;">
                     <div class="row">
                         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
